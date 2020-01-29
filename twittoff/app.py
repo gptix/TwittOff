@@ -1,17 +1,12 @@
-from flask import Flask
+from flask import Flask, render_template
 from .models import DB
-
-#Linux
-#'sqlite:////absolute/path/to/db.sqlite3'
-
 
 def create_app():
     """Create and configure an instance of the Flask app.."""
 
     app = Flask(__name__)
-#    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///absolute path from above'
-#    DB.init.app(app)
-    
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
+    DB.init.app(app)    
 
     @app.route('/')
     def index():
@@ -19,6 +14,7 @@ def create_app():
 
     @app.route('/hello')
     def hello():
-        return "<h1>Hello, from Mars!</h1>"
-
+        return render_template('base.html', title='Howdy', users=User.query.all())
+    
     return app
+
