@@ -10,6 +10,9 @@ flask = "*"
 sqlalchemy = "*"
 basilica = "*"
 flask-sqlalchemy = "*"
+tweepy = "*"
+python-decouple = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.6"
