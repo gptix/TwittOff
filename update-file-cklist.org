@@ -1,0 +1,29 @@
+.
+├── DS10U3S3M3- persistence.ipynb
+├── #.env#
+├── filename.joblib
+├── hello.py
+├── LICENSE
+├── Pipfile
+├── Pipfile.lock
+├── README.md
+├── twitter.py~
+├── twittoff
+│   ├── app.py
+│   ├── db.sqlite3
+│   ├── __init__.py
+│   ├── models.py
+│   ├── models.py~
+│   ├── __pycache__
+│   │   ├── app.cpython-37.pyc
+│   │   └── __init__.cpython-37.pyc
+│   ├── templates
+│   │   ├── base.html
+│   │   ├── user.html
+│   │   └── user.html~
+│   ├── test_conn_to_sqlite.ipynb
+│   ├── twitter.py
+│   └── Untitled.ipynb
+└── update-file-cklist.org
+
+3 directories, 23 files

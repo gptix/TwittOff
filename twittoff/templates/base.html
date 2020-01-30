@@ -1,58 +1,58 @@
-<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>TwittOff App - {{ title }} </title>
-    <link rel="stylesheet" href="https://unpkg.com/picnic"/>
-  </head>
-  <body>
-       <h1>{{title}}!!</h1>    
- 
-  {% block content2 %}
-    <h2>Choose two tweeters and a text</h2>
-    <p>You can choose two Tweeters by their Twitter username, and a text.</p>
-    <p>I will tell you which of the Tweeters would be more likely to tweet your text!</p>
-    <form  action="/choose">
+  <head>
+    <title>TwitOff - {{ title }}</title>
+    <link rel="stylesheet" href="https://unpkg.com/picnic"/>
+  </head>
+  <body>
+    <nav>
+      <a href="/" class="brand"><span>TwitOff!</span></a>
+
+      <div class="menu">
+        <a href="/update" class="button warning">Update Tweets</a>
+      </div>
+    </nav>
+
+    <article class="flex two" style="padding: 3em 1em;">
+      {% block content %}
       <div>
-       Tweeter 1: <select name="username1">
-         {% for user in users %}
-          <option value="{{ user.username }}">{{ user.username }}</option>
-         {% endfor %}
-      </select>
-    </div>
-    <div>
-      Tweeter 2: <select name="username2">
-        {% for user in users %}
-        <option value="{{ user.username }}">{{ user.username }}</option>
-        {% endfor %}
-      </select>
-    </div>
-      <input type="text" name="text_to_measure" placeholder="Enter text to examine">
-      <input type="submit" value="Add text to measure">
-    </form >
-  {% endblock %}
-  <hr>
-<div>
+        <h1>{{ title }}</h1>
 
-  {% block content %}
-  <h2>Add another Twitterer to choose from:</h2>
-        <form action="/user" method="post">
-         <input type="text" name="username" placeholder="User to add">
-         <input type="submit" value="Add User">
+        <p>Select two users to compare:</p>
+
+        <form action="/compare" method="post">
+
+          <select name="user1">
+            {% for user in users %}
+            <option value="{{ user.name }}">{{ user.name }}</option>
+            {% endfor %}
+          </select>
+
+          <select name="user2">
+            {% for user in users %}
+            <option value="{{ user.name }}">{{ user.name }}</option>
+            {% endfor %}
+          </select>
+
+          <input type="text" name="tweet_text" placeholder="Tweet text to predict">
+          <input type="submit" value="Compare Users">
+
         </form>
-  {% endblock %}
+      </div>
 
-</div>
-<hr/>
-<div>
-
-  <h2>Users</h2>
-  <p>These are the Twitterers I know about so far:</p>
-          <ul>
+      <div>
+        <h2>Twitter Users</h2>
         {% for user in users %}
-        <li> {{ user.username }}</li>
+        <a href="/user/{{ user.name }}"><span class="stack">{{ user.name }}</span></a>
         {% endfor %}
-      </ul>
-</div>
+        <form action="/user" method="post">
+          <input type="text" name="user_name" placeholder="User to add">
+          <input type="submit" value="Add User">
+        </form>
+      </div>
 
-  </body>
+      {% endblock %}
+    </article>
+
+  </body>
 </html>

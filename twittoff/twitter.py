@@ -1,7 +1,7 @@
-import tweepy
 import basilica
-import decouple
+import tweepy
 from decouple import config
+
 from .models import DB, Tweet, User
 
 TWITTER_AUTH = tweepy.OAuthHandler(config('TWITTER_CONSUMER_KEY'), config('TWITTER_CONSUMER_SECRET'))
@@ -13,7 +13,7 @@ BASILICA = basilica.Connection(config("BASILICA_KEY"))
 def add_or_update_user(name):
     """
     Add or update a user and their Tweets.
-    Throw an error if user doesn't exist or is private.
+    Throw an error if user doesn't exist or private.
     """
     try:
         twitter_user = TWITTER.get_user(name)
@@ -27,14 +27,18 @@ def add_or_update_user(name):
             db_user.newest_tweet_id = tweets[0].id
 
         for tweet in tweets:
-            emb = BASILICA.embed_sentence(tweet.text, model='twitter')
-            db_tweet = Tweet(id=tweet.id, text=tweet.text, embedding=emb)
+            embedding = BASILICA.embed_sentence(tweet.text, model='twitter')
+            db_tweet = Tweet(id=tweet.id, text=tweet.text, embedding=embedding)
             db_user.tweets.append(db_tweet)
             DB.session.add(db_tweet)
-
     except Exception as e:
-        print(f"Encountered error in add_or_update while processing {name}: {e}")
+        print(f'Error processing {name}: {e}')
         raise e
-
     else:
         DB.session.commit()
+
+
+def update_all_users():
+    """Update all Tweets for all Users in the User table."""
+    for user in User.query.all():
+        add_or_update_user(user.name)
