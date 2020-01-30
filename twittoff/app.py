@@ -20,7 +20,7 @@ def create_app():
     def root():
         DB.create_all()
         return render_template(
-            'base.html', title='Thorium Incorporated!', users=User.query.all())
+            'base.html', title='The Thoriumator Tweetometric', users=User.query.all())
 
 
     @app.route('/user', methods=['POST'])

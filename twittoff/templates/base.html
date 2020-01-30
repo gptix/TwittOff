@@ -5,45 +5,54 @@
     <link rel="stylesheet" href="https://unpkg.com/picnic"/>
   </head>
   <body>
-    
+       <h1>Welcome to {{title}}!!</h1>    
  
   {% block content2 %}
-    <h1>Choose two tweeters and a text</h1>
+    <h2>Choose two tweeters and a text</h2>
+    <p>You can choose two Tweeters by their Twitter username, and a text.</p>
+    <p>I will tell you which of the Tweeters would be more likely to tweet your text!</p>
     <form  action="/choose">
-      <select name="username1">
+      <div>
+       Tweeter 1: <select name="username1">
+         {% for user in users %}
+          <option value="{{ user.username }}">{{ user.username }}</option>
+         {% endfor %}
+      </select>
+    </div>
+    <div>
+      Tweeter 2: <select name="username2">
         {% for user in users %}
-        <option value="{{user}}"{{user}}</option>
+        <option value="{{ user.username }}">{{ user.username }}</option>
         {% endfor %}
       </select>
-
-      <select name="username2">
-        {% for user in users %}
-        <option value="{{user}}"{{user}}</option>
-        {% endfor %}
-      </select>
-
-      <input type="text" name="text_to_measure" placeholder1="Enter text to examine">
-
-      <input type="submit" value="Add User">
+    </div>
+      <input type="text" name="text_to_measure" placeholder="Enter text to examine">
+      <input type="submit" value="Add text to measure">
     </form >
   {% endblock %}
-
+  <hr>
+<div>
 
   {% block content %}
-     <h1>Welcome to {{title}}!!</h1>
+  <h2>Add another Twitterer to choose from:</h2>
         <form action="/user" method="post">
          <input type="text" name="username" placeholder="User to add">
          <input type="submit" value="Add User">
         </form>
   {% endblock %}
 
-      <ul>
-        <h2>Users</h2>
+</div>
+<hr/>
+<div>
+
+  <h2>Users</h2>
+  <p>These are the Twitterers I know about so far:</p>
+          <ul>
         {% for user in users %}
         <li> {{ user.username }}</li>
         {% endfor %}
       </ul>
-
+</div>
 
   </body>
 </html>
