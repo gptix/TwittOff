@@ -33,7 +33,7 @@ def add_or_update_user(name):
             DB.session.add(db_tweet)
 
     except Exception as e:
-        print(f"Encountered error while processing {name}: {e}")
+        print(f"Encountered error in add_or_update while processing {name}: {e}")
         raise e
 
     else:

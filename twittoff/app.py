@@ -20,7 +20,7 @@ def create_app():
     def root():
         DB.create_all()
         return render_template(
-            'base.html', title='The Thoriumator Tweetometric', users=User.query.all())
+            'base.html', title='Welcome to The Thoriumator Tweetometric', users=User.query.all())
 
 
     @app.route('/user', methods=['POST'])
@@ -32,9 +32,9 @@ def create_app():
                 add_or_update_user(name)
                 message = f'User {name} successfully updated!'.tweets
         except Exception as e:
-            message = f'Error while trying to add user {name}: {e}'
+            message = f'Error in route user while trying to add user {name}: {e}'
             tweets = []
-        return render_template('user.html', title=name, message=message, tweets=tweets)
+        return render_template('user.html', title=f'Tweetinator tried to add {name}', message=message, tweets=tweets, users=User.query.all() )
 
 
 
