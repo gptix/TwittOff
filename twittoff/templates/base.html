@@ -8,11 +8,33 @@
     
  
   {% block content %}
+    <h1>Choose two tweeters and a text</h1>
+    <form  action="/choose">
+      <select name="username1">
+        {% for user in users %}
+        <option value="{{user}}"{{user}}</option>
+        {% endfor %}
+      </select>
+
+      <select name="username2">
+        {% for user in users %}
+        <option value="{{user}}"{{user}}</option>
+        {% endfor %}
+      </select>
+
+      <input type="text" name="text_to_measure" placeholder1="Enter text to examine">
+
+      <input type="submit" value="Add User">
+    </form >
+  {% endblock %}
+
+
+  {% block content %}
      <h1>Welcome to {{title}}!!</h1>
         <form action="/user" method="post">
-        <input type="text" name="username" placeholder="User to add">
-        <input type="submit" value="Add User"
-
+         <input type="text" name="username" placeholder="User to add">
+         <input type="submit" value="Add User">
+        </form>
   {% endblock %}
 
       <ul>

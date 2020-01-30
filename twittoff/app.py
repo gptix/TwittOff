@@ -48,12 +48,15 @@ def create_app():
     return app
 
 
-def add_user(username):
-    # get twitter user data from tweepy API
-    twitter_user = TWITTER.get_user(username)
-
-    # Add user unfo to User table in database
-    db_user = User(id=twitter_user.id, username=twitter_user.name)
-    DB.session.add(db_user)
-
-    
+# Add a form to let the client select two Twitter Users and enter Tweet 
+# text to predict which user is more likely to tweet the given text.
+# - [ ] add route
+# # - [ ] add form
+#     @app.route('/choose')
+#     def choose_tweeters():
+#         # we will be sent three values
+        # - text
+        # - username1
+        # - username2
+        # Decide which is better
+        # return answer
